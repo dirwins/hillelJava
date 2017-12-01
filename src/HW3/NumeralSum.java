@@ -13,11 +13,12 @@ public class NumeralSum {
         if (getNumber.hasNextInt()) {
             String number = getNumber.nextLine();
             char[] charArray = number.toCharArray();
-            System.out.print("Your reverse number is ");
-            for (int i = charArray.length - 1; i >= 0; i--) {
-                System.out.print(charArray[i]);
+            int Sum = 0;
+            for(int i = 0; i < charArray.length; i++){
+                Sum = Sum + (int)charArray[i] - 48;
             }
-        } else {
+            System.out.println("Sum of your numbers is " + Sum);
+        }else{
             System.out.println("Your input must contain only numbers.");
         }
     }
