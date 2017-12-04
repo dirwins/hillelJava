@@ -7,32 +7,24 @@ import java.util.Scanner;
 public class Cover {
     private static Scanner getSise = new Scanner(System.in);
 
-    //Check odd/even Number
-    public static boolean OddEven(int input) {
-        if (input % 2 == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public static void main(String[] args) {
         getSise.useLocale(Locale.ENGLISH);
-        System.out.println("Enter size:");
-        int size = getSise.nextInt();
+        System.out.println("Enter width:");
+        int width = getSise.nextInt();
+        System.out.println("Enter height:");
+        int height = getSise.nextInt();
 
-
-        for (int i = 1, a = 0; i <= size; i++, a++) {
-            for (int j = 1, b = 0; j <= size; j++, b++) {
-                if (i == 1 || j == 1 || i == size || j == size || i == j || j == size - (i - 1))
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int x = (int) (0.5 + (1.0 * (i) * width) / (height - 0.5));
+                if (i == 0 || j == 0 || i == height - 1 || j == width - 1 || x == j || j == width - x - 1) {
                     System.out.print("*");
-                else
+                } else {
                     System.out.print(" ");
-
+                }
             }
             System.out.println();
         }
     }
-
-
 }
