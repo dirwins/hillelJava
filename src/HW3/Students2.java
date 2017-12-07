@@ -2,6 +2,7 @@ package HW3;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,6 +11,21 @@ public class Students2 {
 //    String Name;
 //    String[] Marks;
 //    String[] visit;
+
+    static String[][] jounal1 = new String[3][];
+    static String[] firstGroup = {"Ivanov", "Korolev", "Chenkov", "Berezovsky"};
+    static String[] marks1 = {"5 5 3", "3 5 2", "3 5 4", "5 5 4"};
+    static String[] visit1 = {"absent", "present", "absent", "present"};
+//
+//    String[][] jounal1Temp;
+//
+//    String[][] jounal2 = new String[3][];
+//    String[] secondGroup = {"Gorin", "Yakovenko", "Kozarenko", "Kalinichenko"};
+//    String[] marks2 = {"5 4 5", "4 5 5", "5 3 5", "3 5 4"};
+//    String[] visit2 = {"present", "present", "absent", "present"};
+//
+//    String[][] jounal2Temp;
+
 
     private static Scanner getInput = new Scanner(System.in);
 
@@ -43,18 +59,19 @@ public class Students2 {
         return num;
     }
 
-    private static void getChoice() {
+    private static void getChoice(String[][] input) {
         int choice = getValueActoin();
+
         switch (choice) {
             case 0:
                 group = getValueGroup();
-                getChoice();
+                getChoice(input);
                 break;
             case 1:
-                addRecord(group);
+                addRecord(input);
                 break;
             case 2:
-//                    deleteRecord();
+                deleteRecord(input);
                 break;
             case 3:
 //                    containsRecord();
@@ -78,12 +95,12 @@ public class Students2 {
 //                    equalsGroups();
                 break;
             case 10:
-                    PrintGroup();
+                PrintGroup();
                 break;
 
             default:
                 System.out.println("Illegal choice.");
-                getChoice();
+                getChoice(input);
         }
     }
 
@@ -116,46 +133,119 @@ public class Students2 {
 //    }
 
 
-    private static void addRecord(int group) {
+    private static void addRecord(String[][] input) {
+        String[][] newJournal = new String[input.length][];
 
-        String[] journalTemp = new String[3];
+        String[] journalGroup;
+        String[] GroupTemp;
+        String[] journalMarks;
+        String[] marksTemp;
+        String[] journalVisit;
+        String[] visitTemp;
+
+
+
+
+
+
+        if (!Arrays.equals(input, newJournal)) {
+//            newJournal = input;
+            journalGroup = input[0];
+            journalMarks = input[1];
+            journalVisit = input[2];
+
+            GroupTemp = new String[input.length+1];
+            marksTemp = new String[input.length+1];
+            visitTemp = new String[input.length+1];
+        } else {
+            System.out.println("Equals");
+            journalGroup = Students2.firstGroup;   // include Global array
+            journalMarks = Students2.marks1;
+            journalVisit = Students2.visit1;
+            GroupTemp = new String[journalGroup.length + 1];
+            marksTemp = new String[journalMarks.length + 1];
+            visitTemp = new String[journalVisit.length + 1];
+        }
+
+
+
+
+
+
+
+
 
         System.out.println("Enter Name of student:");
-        //String getName = getName().toString();
-        //journalTemp[0] = getName;
+
         String getName = getName();
-        journalTemp[0] = getName;
+//        GroupTemp[0] = getName;
         System.out.println(getName + " is added to group.");
-
-
 
         System.out.println("Enter his marks:");
         String getMarks = getMarks();
         System.out.println(getMarks + " is added for this student.");
-        journalTemp[1] = getMarks;
+//        GroupTemp[1] = getMarks;
 
         System.out.println("Enter Visitation of student:");
         String getAP = getAP();
         System.out.println(getAP + " is visitation of this student.");
-        journalTemp[2] = getAP;
-        System.out.println("Record is added.");
+//        GroupTemp[2] = getAP;
+        System.out.println("Record about this student is added.");
 
-        for (int i = 0; i < journalTemp.length; i++) {
-            System.out.print(journalTemp[i] + "    ");
+//        for (int i = 0; i < journalTemp.length; i++) {
+//            System.out.print(journalTemp[i] + "    ");
+//        }
+
+
+        for (int i = 0; i < GroupTemp.length; i++) {
+            if (i == (GroupTemp.length - 1)) {
+                GroupTemp[GroupTemp.length - 1] = getName;
+            } else {
+                GroupTemp[i] = journalGroup[i];
+            }
+            System.out.println(GroupTemp[i]);
+            newJournal[0] = GroupTemp;
+        }
+        for (int i = 0; i < marksTemp.length; i++) {
+            if (i == (marksTemp.length - 1)) {
+                marksTemp[marksTemp.length - 1] = getMarks;
+            } else {
+                marksTemp[i] = journalMarks[i];
+            }
+            newJournal[1] = marksTemp;
+            //System.out.println(GroupTemp[i]);
+        }
+        for (int i = 0; i < visitTemp.length; i++) {
+            if (i == (visitTemp.length - 1)) {
+                visitTemp[visitTemp.length - 1] = getAP;
+            } else {
+                visitTemp[i] = journalVisit[i];
+            }
+            newJournal[2] = visitTemp;
+            //System.out.println(GroupTemp[i]);
         }
 
-        System.out.println();
+
         System.out.println();
         System.out.println("Check another action:");
-        getChoice();
+        getChoice(newJournal);
+
     }
 
-    private static void deleteRecord() {
+
+    private static void deleteRecord(String[][] input) {
         System.out.println("Enter Name of student for deleting:");
 //        getName();
         // Deleting function
+        String[][] temp = input;
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp[i].length; j++) {
+                System.out.print(temp[i][j] + "      ");
+            }
+            System.out.println();
+        }
         System.out.println("Student is deleted");
-//        getChoice();
+        getChoice(temp);
     }
 
     private static void containsRecord() {
@@ -193,29 +283,32 @@ public class Students2 {
 //        getChoice("");
     }
 
+
     private static void PrintGroup() {
         //groupChoice = group;
         System.out.println("Print Group");
 
-        //journal1[];
 
+//String[][] result = new String[][];
 
-        String[][] journal = journal1("", "", "");
+        String[][] journal = journal1();
         for (int i = 0; i < journal.length; i++) {
             //System.out.println(journal + "    ");
             for (int j = 0; j < journal[i].length; j++) {
-                //journal[i][j] = journal[j][i];
+                String temp = journal[i][j];
+                journal[j][i] = temp;
+
+                journal[i][j] = journal[j][i];
+
                 System.out.print(journal[i][j] + "    ");
             }
             System.out.println();
         }
-
-
-        getChoice();
+//        getChoice();
     }
 
 
-    public static void actoinList() {
+    public static void actionList() {
         System.out.println();
         System.out.println("0.  Change a group");
         System.out.println("1.  Add a student");
@@ -273,12 +366,16 @@ public class Students2 {
     }
 
 
-    private static String[][] journal1(String Name, String marks, String visit) {
+    private static String[][] journal1() { // String Name, String marks, String visit
 
         String[][] journal1 = new String[3][];
-        String[] firstGroup = {"Ivanov", "Korolev", "Chenkov", "Berezovsky"};
-        String[] marks1 = {"5 5 3", "3 5 2", "3 5 4", "5 5 4"};
-        String[] visit1 = {"absent", "present", "absent", "present"};
+
+//        String[] firstGroup = {"Ivanov", "Korolev", "Chenkov", "Berezovsky"};
+//        String[] marks1 = {"5 5 3", "3 5 2", "3 5 4", "5 5 4"};
+//        String[] visit1 = {"+ + - + -", "- + + + +", "+ + - + +", "- + - - +"};
+//        String[] firstGroup = {"0", "0", "0", "0"};
+//        String[] marks1 = {"1", "1", "1", "1"};
+//        String[] visit1 = {"2", "2", "2", "2"};
 
         journal1[0] = firstGroup;
         journal1[1] = marks1;
@@ -289,25 +386,32 @@ public class Students2 {
 
     private static String[][] journal2(String Name, String marks, String visit) {
         String[][] journal2 = new String[3][];
-        String[] secondGroup = {"Gorin", "Yakovenko", "Kozarenko", "Kalinichenko"};
-        String[] marks2 = {"5 4 5", "4 5 5", "5 3 5", "3 5 4"};
-        String[] visit2 = {"present", "present", "absent", "present"};
+//        String[] secondGroup = {"Gorin", "Yakovenko", "Kozarenko", "Kalinichenko"};
+//        String[] marks2 = {"5 4 5", "4 5 5", "5 3 5", "3 5 4"};
+//        String[] visit2 = {"- - + + +", "+ + - + -", "- + - - +", "+ + - + +"};
 
-        journal2[0] = secondGroup;
-        journal2[1] = marks2;
-        journal2[2] = visit2;
+//        journal2[0] = secondGroup;
+//        journal2[1] = marks2;
+//        journal2[2] = visit2;
 
         return journal2;
     }
 
     public static void main(String[] args) {
+
+//        jounal1 = new String[3][];
+//        firstGroup = {"Ivanov", "Korolev", "Chenkov", "Berezovsky"};
+//        marks1 = {"5 5 3", "3 5 2", "3 5 4", "5 5 4"};
+//        visit1 = {"absent", "present", "absent", "present"};
+
         System.out.println("It`s a student`s database.");
         System.out.println("Enter 'group1' or 'group2. ");
 
+        System.out.println();
         getValueGroup();
-        actoinList();
+        actionList();
         //Group1.getValueActoin();
-        getChoice();
+        getChoice(jounal1);
 
     }
 }
