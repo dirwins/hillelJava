@@ -24,7 +24,7 @@ public class Students {
     protected static String setName() {            // Receiving Name from console
         getInput.useLocale(Locale.ENGLISH);
         name = getInput.next();
-//        System.out.println("Your input name is " + name);
+        System.out.println("Your input name is " + name);
         return name;
     }
 

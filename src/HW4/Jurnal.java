@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 public class Jurnal {
     private static Scanner getInput = new Scanner(System.in);
-    private static Students Student = new Students(Students.setName(), Students.setMarks(), Students.setVisits());
+    private static Students Student;
     private static Students[] studentsArray = new Students[0];
+    private static Students[] studentsArrayTemp;
 
     //    private static int getValueGroup() { // , String Name, String[] Marks, String[] visit
 //        getInput.useLocale(Locale.ENGLISH);
@@ -125,7 +126,7 @@ public class Jurnal {
     }
 
     private static Students[] addStudent() {
-        Students[] studentsArrayTemp;
+
 
         String name;
         int[] marks;
@@ -134,10 +135,11 @@ public class Jurnal {
         name = Students.setName();
         System.out.println("Enter his first Mark (like as 2, 3, 4, 5), if it is...");
         marks = Students.setMarks();
-        System.out.println("Enter his visitation('+' is present, '-' is absent), if it is...");
+//        System.out.println("Enter his visitation('+' is present, '-' is absent), if it is...");
         visits = Students.setVisits();
 //        System.out.println("Name: " + Student.name + "     Marks: " + Student.marks + "     Visits: " + Student.visits);
         if(studentsArray.length == 0){
+            Student = new Students(Students.setName(), Students.setMarks(), Students.setVisits());
             studentsArrayTemp = new Students[studentsArray.length+1];
             studentsArrayTemp[0] = Student;
         }else{
@@ -182,9 +184,9 @@ public class Jurnal {
     }
 
     public static void main(String[] args) {
-        System.out.println("It`s a Journal.");
+        System.out.println("It`s 1a Journal.");
         System.out.println("Check an actoin:");
-//        inputAction();
+        inputAction();
         getChoice();
 //        Students Student = new Students();
 //        Student.setName();
