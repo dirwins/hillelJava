@@ -56,7 +56,8 @@ public class Arrays {
     }
 
     public static void main(String[] args) {
-        System.out.println("Array in memory {5, 6, 9, 5}");
+        System.out.println("Array 1 - {5, 6, 9, 5}");
+        System.out.println("Array 2 - {7, 1, 2, 3, 8}");
         ArraysActions newArray = new ArraysActions();
         checkAction();
         switch (getInputAction()) {
